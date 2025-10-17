@@ -4,153 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ботолов - Тест на виявлення ботів</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
         body {
-            font-family: 'Inter', sans-serif;
-            max-width: 700px;
-            margin: 40px auto;
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
             padding: 20px;
-            background-color: #FFFFFF;
-            color: #4A4A4A;
-            line-height: 1.6;
-        }
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .logo img {
-            max-width: 450px;
-            height: auto;
+            background-color: #f4f4f9;
+            color: #333;
         }
         h1 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #4A4A4A;
             text-align: center;
-            margin-bottom: 30px;
+            color: #2c3e50;
         }
         .question {
             margin: 15px 0;
-            padding: 15px;
-            background-color: #F9F9F9;
-            border-left: 4px solid #4A90E2;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        .question:hover {
-            background-color: #F0F4F8;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         label {
-            display: flex;
-            align-items: center;
+            display: block;
+            margin: 5px 0;
             font-size: 16px;
-            cursor: pointer;
-        }
-        input[type="checkbox"] {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #4A90E2;
-            border-radius: 4px;
-            margin-right: 10px;
-            cursor: pointer;
-            position: relative;
-        }
-        input[type="checkbox"]:checked {
-            background-color: #4A90E2;
-        }
-        input[type="checkbox"]:checked::after {
-            content: '✔';
-            color: #FFFFFF;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 14px;
         }
         button {
             display: block;
             width: 100%;
-            padding: 12px;
-            margin: 30px 0;
-            background-color: #F28C38;
-            color: #FFFFFF;
+            padding: 10px;
+            margin: 20px 0;
+            background-color: #3498db;
+            color: #fff;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 18px;
-            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #E07B30;
+            background-color: #2980b9;
         }
         #result {
             margin-top: 20px;
             padding: 15px;
-            border-radius: 4px;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
+            border-radius: 5px;
+            display: none;
         }
-        #result.show {
-            opacity: 1;
-        }
-        .high {
-            background-color: #e74c3c;
-            color: #FFFFFF;
-        }
-        .medium {
-            background-color: #f1c40f;
-            color: #4A4A4A;
-        }
-        .low {
-            background-color: #2ecc71;
-            color: #FFFFFF;
-        }
-        @media (max-width: 600px) {
-            body {
-                margin: 20px;
-                padding: 10px;
-            }
-            h1 {
-                font-size: 20px;
-            }
-            .question {
-                padding: 10px;
-            }
-            label {
-                font-size: 14px;
-            }
-            button {
-                font-size: 16px;
-                padding: 10px;
-            }
-        }
+        .high { background-color: #e74c3c; color: #fff; }
+        .medium { background-color: #f1c40f; color: #333; }
+        .low { background-color: #2ecc71; color: #fff; }
     </style>
 </head>
 <body>
-    <!-- Логотип із папки images -->
-    <div class="logo">
-        <img src="images/logo.png" alt="Botolov Logo">
-    </div>
     <h1>Ботолов - Перевірка акаунта на бота</h1>
     <form id="botTestForm">
         <div class="question">
             <label>
                 <input type="checkbox" name="q1">
-                Акаунт має менше 1,000 фоловерів, або більшість фоловерів мають генеричні імена (наприклад, User123), однакові аватарки чи створені недавно.
+                Акаунт має менше 1,000 фоловерів, або більшість фоловерів мають генеричні імена (наприклад, User123), однакові аватарки чи створені недавно (в один період).
             </label>
         </div>
         <div class="question">
             <label>
                 <input type="checkbox" name="q2">
-                Біо акаунта коротке (1–2 слова), порожнє або містить шаблонні патріотичні фрази (наприклад, 'Слава нації!' чи надмірні емодзі 🇺🇦).
+                Біо акаунта коротке (1–2 слова), порожнє або містить шаблонні патріотичні фрази (наприклад, "Слава нації!" чи надмірні емодзі 🇺🇦).
             </label>
         </div>
         <div class="question">
@@ -162,13 +79,13 @@
         <div class="question">
             <label>
                 <input type="checkbox" name="q4">
-                Акаунт публікує пости регулярно (наприклад, щогодини) або повторює однакові меседжі/фрази (наприклад, пропагандистські гасла з емодзі).
+                Акаунт публікує пости регулярно (наприклад, щогодини) або повторює однакові меседжі/фрази (наприклад, пропагандистські гасла з однаковими емодзі).
             </label>
         </div>
         <div class="question">
             <label>
                 <input type="checkbox" name="q5">
-                Акаунт публікує схожі пости синхронно з іншими або отримує репости від акаунтів із низькими фоловерами чи схожими біо.
+                Акаунт публікує схожі пости синхронно з іншими (наприклад, у той же час) або отримує репости від акаунтів із низькими фоловерами чи схожими біо.
             </label>
         </div>
         <div class="question">
@@ -180,7 +97,7 @@
         <div class="question">
             <label>
                 <input type="checkbox" name="q7">
-                У постах є неприродні мовні конструкції, надмірні емодзі (наприклад, 🇺🇦🇺🇦) або текст виглядає згенерованим.
+                У постах є неприродні мовні конструкції, надмірні емодзі (наприклад, 🇺🇦🇺🇦) або текст виглядає згенерованим (шаблонні фрази).
             </label>
         </div>
         <div class="question">
@@ -199,7 +116,6 @@
             const checkboxes = form.querySelectorAll('input[type="checkbox"]');
             let score = 0;
 
-            // Підраховуємо кількість вибраних чекбоксів
             checkboxes.forEach(checkbox => {
                 if (checkbox.checked) {
                     score++;
@@ -207,17 +123,12 @@
             });
 
             const resultDiv = document.getElementById('result');
-            // Очищаємо попередні класи стилів
-            resultDiv.className = ''; // Видаляємо всі класи
             resultDiv.style.display = 'block';
-            resultDiv.classList.add('show');
-
             let message = '';
             let className = '';
 
-            // Визначаємо результат на основі оцінки
             if (score >= 5) {
-                message = `Висока ймовірність бота (${score}/8 балів). Акаунт має багато ознак автоматизації, координації або пропаганди. Рекомендуємо перевірити пости через ZeroGPT або Botometer.`;
+                message = `Висока ймовірність бота (${score}/8 балів). Акаунт має багато ознак автоматизації, координації або пропаганди. Рекомендуємо перевірити пости через інструменти типу ZeroGPT або Botometer.`;
                 className = 'high';
             } else if (score >= 3) {
                 message = `Середня ймовірність бота (${score}/8 балів). Акаунт має підозрілі ознаки, але може бути частково органічним. Перевірте фоловерів і взаємодії.`;
@@ -227,13 +138,10 @@
                 className = 'low';
             }
 
-            // Оновлюємо текст і клас результату
             resultDiv.textContent = message;
-            resultDiv.classList.add(className);
+            resultDiv.className = className;
         }
     </script>
 </body>
 </html>
-
-
 
