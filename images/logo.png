@@ -1,26 +1,37 @@
 from PIL import Image, ImageDraw, ImageFont
 import requests
 from io import BytesIO
+import os
 
-# Завантаження шрифту Inter із Google Fonts
-font_url = "https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5n-wU.woff2"
+# Створення папки images, якщо вона не існує
+if not os.path.exists('images'):
+    os.makedirs('images')
+
+# Завантаження шрифту Inter у форматі .ttf із Google Fonts
+font_url = "https://github.com/googlefonts/inter/raw/main/src/Inter-Regular.ttf"
 response = requests.get(font_url)
-font_data = BytesIO(response.content)
+
+# Перевірка успішності завантаження
+if response.status_code != 200:
+    print("Помилка завантаження шрифту. Використовується дефолтний шрифт.")
+    font = ImageFont.load_default()
+else:
+    font_data = BytesIO(response.content)
+    try:
+        font = ImageFont.truetype(font_data, size=30)  # Зменшено розмір для 150x50
+    except Exception as e:
+        print(f"Помилка завантаження шрифту: {e}. Використовується дефолтний шрифт.")
+        font = ImageFont.load_default()
 
 # Створення зображення
 width, height = 150, 50
 image = Image.new('RGB', (width, height), color='#FFFFFF')  # Білий фон
 draw = ImageDraw.Draw(image)
 
-# Завантаження шрифту
-try:
-    font = ImageFont.truetype(font_data, size=40)
-except:
-    font = ImageFont.load_default()
+# Малювання "Б" і "." (чорні)
+draw.text((30, 10), "Б", font=font, fill='#000000')  # Оптимізоване позиціонування
+draw.text((70, 10), ".", font=font, fill='#000000')
 
-# Малювання "Б" (чорна) і "." (чорна)
-draw.text((20, 5), "Б", font=font, fill='#000000')
-draw.text((70, 5), ".", font=font, fill='#000000')
-
-# Збереження у папку images
+# Збереження зображення
 image.save('images/logo.png')
+print("Логотип збережено в images/logo.png")
