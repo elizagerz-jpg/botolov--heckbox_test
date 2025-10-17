@@ -6,7 +6,6 @@
     <title>Ботолов - Тест на виявлення ботів</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Ваш CSS із попереднього запиту, без змін */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -200,6 +199,7 @@
             const checkboxes = form.querySelectorAll('input[type="checkbox"]');
             let score = 0;
 
+            // Підраховуємо кількість вибраних чекбоксів
             checkboxes.forEach(checkbox => {
                 if (checkbox.checked) {
                     score++;
@@ -207,11 +207,15 @@
             });
 
             const resultDiv = document.getElementById('result');
+            // Очищаємо попередні класи стилів
+            resultDiv.className = ''; // Видаляємо всі класи
             resultDiv.style.display = 'block';
             resultDiv.classList.add('show');
+
             let message = '';
             let className = '';
 
+            // Визначаємо результат на основі оцінки
             if (score >= 5) {
                 message = `Висока ймовірність бота (${score}/8 балів). Акаунт має багато ознак автоматизації, координації або пропаганди. Рекомендуємо перевірити пости через ZeroGPT або Botometer.`;
                 className = 'high';
@@ -223,11 +227,13 @@
                 className = 'low';
             }
 
+            // Оновлюємо текст і клас результату
             resultDiv.textContent = message;
-            resultDiv.className = className;
+            resultDiv.classList.add(className);
         }
     </script>
 </body>
 </html>
+
 
 
