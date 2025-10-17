@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ботолов - Тест на виявлення ботів</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .question {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .high { background-color: #e74c3c; color: #fff; }
+        .medium { background-color: #f1c40f; color: #333; }
+        .low { background-color: #2ecc71; color: #fff; }
+    </style>
+</head>
+<body>
+    <h1>Ботолов - Перевірка акаунта на бота</h1>
+    <form id="botTestForm">
+        <div class="question">
+            <label>
+                <input type="checkbox" name="q1">
+                Акаунт має менше 1,000 фоловерів, або більшість фоловерів мають генеричні імена (наприклад, User123), однакові аватарки чи створені недавно (в один період).
+            </label>
+        </div>
+        <div class="question">
+            <label>
+                <input type="checkbox" name="q2">
+                Біо акаунта коротке (1–2 слова), порожнє або містить шаблонні патріотичні фрази (наприклад, "Слава нації!" чи надмірні емодзі 🇺🇦).
+            </label>
+        </div>
+        <div class="question">
+            <label>
+                <input type="checkbox" name="q3">
+                Акаунт створено менше 2 років тому (наприклад, після 2023 для перевірки у 2025).
+            </label>
+        </div>
+        <div class="question">
+            <label>
+                <input type="checkbox" name="q4">
+                Акаунт публікує пости регулярно (наприклад, щогодини) або повторює однакові меседжі/фрази (наприклад, пропагандистські гасла з однаковими емодзі).
+            </label>
+        </div>
+        <div class="question">
+            <label>
+                <input type="checkbox" name="q5">
+                Акаунт публікує схожі пости синхронно з іншими (наприклад, у той же час) або отримує репости від акаунтів із низькими фоловерами чи схожими біо.
+            </label>
+        </div>
+        <div class="question">
+            <label>
+                <input type="checkbox" name="q6">
+                Пост акаунта отримує багато лайків/репостів (>100) у перші 10–30 хвилин, особливо від акаунтів із низькими фоловерами.
+            </label>
+        </div>
+        <div class="question">
+            <label>
+                <input type="checkbox" name="q7">
+                У постах є неприродні мовні конструкції, надмірні емодзі (наприклад, 🇺🇦🇺🇦) або текст виглядає згенерованим (шаблонні фрази).
+            </label>
+        </div>
+        <div class="question">
+            <label>
+                <input type="checkbox" name="q8">
+                Акаунт зосереджений на одній темі (наприклад, пропагандистські твердження) з емоційними тригерами (гнів, звинувачення).
+            </label>
+        </div>
+        <button type="button" onclick="calculateResult()">Розрахувати результат</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        function calculateResult() {
+            const form = document.getElementById('botTestForm');
+            const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+            let score = 0;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    score++;
+                }
+            });
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            let message = '';
+            let className = '';
+
+            if (score >= 5) {
+                message = `Висока ймовірність бота (${score}/8 балів). Акаунт має багато ознак автоматизації, координації або пропаганди. Рекомендуємо перевірити пости через інструменти типу ZeroGPT або Botometer.`;
+                className = 'high';
+            } else if (score >= 3) {
+                message = `Середня ймовірність бота (${score}/8 балів). Акаунт має підозрілі ознаки, але може бути частково органічним. Перевірте фоловерів і взаємодії.`;
+                className = 'medium';
+            } else {
+                message = `Низька ймовірність бота (${score}/8 балів). Акаунт імовірно органічний, але перевірте, якщо є сумніви щодо контенту.`;
+                className = 'low';
+            }
+
+            resultDiv.textContent = message;
+            resultDiv.className = className;
+        }
+    </script>
+</body>
+</html>
+
