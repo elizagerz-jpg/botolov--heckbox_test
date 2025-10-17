@@ -18,7 +18,7 @@ if response.status_code != 200:
 else:
     font_data = BytesIO(response.content)
     try:
-        font = ImageFont.truetype(font_data, size=30)  # Зменшено розмір для 150x50
+        font = ImageFont.truetype(font_data, size=30)  # Розмір для 150x50
     except Exception as e:
         print(f"Помилка завантаження шрифту: {e}. Використовується дефолтний шрифт.")
         font = ImageFont.load_default()
@@ -29,9 +29,13 @@ image = Image.new('RGB', (width, height), color='#FFFFFF')  # Білий фон
 draw = ImageDraw.Draw(image)
 
 # Малювання "Б" і "." (чорні)
-draw.text((30, 10), "Б", font=font, fill='#000000')  # Оптимізоване позиціонування
+draw.text((30, 10), "Б", font=font, fill='#000000')  # Позиція оптимізрована
 draw.text((70, 10), ".", font=font, fill='#000000')
 
 # Збереження зображення
 image.save('images/logo.png')
 print("Логотип збережено в images/logo.png")
+
+# Відображення зображення (для Google Colab)
+from IPython.display import Image as IPImage
+IPImage('images/logo.png')
