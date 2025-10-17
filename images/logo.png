@@ -1,0 +1,26 @@
+from PIL import Image, ImageDraw, ImageFont
+import requests
+from io import BytesIO
+
+# Завантаження шрифту Inter із Google Fonts
+font_url = "https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5n-wU.woff2"
+response = requests.get(font_url)
+font_data = BytesIO(response.content)
+
+# Створення зображення
+width, height = 150, 50
+image = Image.new('RGB', (width, height), color='#FFFFFF')  # Білий фон
+draw = ImageDraw.Draw(image)
+
+# Завантаження шрифту
+try:
+    font = ImageFont.truetype(font_data, size=40)
+except:
+    font = ImageFont.load_default()
+
+# Малювання "Б" (чорна) і "." (чорна)
+draw.text((20, 5), "Б", font=font, fill='#000000')
+draw.text((70, 5), ".", font=font, fill='#000000')
+
+# Збереження у папку images
+image.save('images/logo.png')
